@@ -106,6 +106,7 @@ def main():
     plt.xlabel('Year')
     plt.ylabel('Percentage Race')
     plt.title("Race Breakdown of People Living with HIV over Time")
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
     plt.savefig('line_plot_race.png', bbox_inches='tight')
 
     #Transmission
