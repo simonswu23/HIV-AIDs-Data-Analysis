@@ -35,6 +35,20 @@ def main():
     nb['Percentage'] = nb_perc * 100
     #print(nb)
 
+    #all_gender = pd.concat([t_men, t_women, c_men, c_women, nb]).reset_index(drop=True)
+    #print(all_gender)
+
+    fig, ax = plt.subplots()
+    sns.lineplot(data=c_men, x='Year', y='Percentage', label='Cis Men', ax=ax)
+    sns.lineplot(data=c_women, x='Year', y='Percentage', label='Cis Women', ax=ax)
+    sns.lineplot(data=t_men, x='Year', y='Percentage', label='Trans Men', ax=ax, alpha=0.7)
+    sns.lineplot(data=t_women, x='Year', y='Percentage', label='Trans Women', ax=ax)
+    sns.lineplot(data=nb, x='Year', y='Percentage', label='Alternative Gender', ax=ax, linestyle="dashed")
+    plt.xlabel('Year')
+    plt.ylabel('Percentage Gender')
+    plt.title("Gender Breakdown of People Living with HIV over Time")
+    plt.savefig('line_plot_gender.png', bbox_inches='tight')
+
     # By Race
     r_counts = hiv_data[hiv_data['Category'] == 'Race/Ethnicity']
     r_counts = r_counts.groupby('Year')['Count'].sum().reset_index()
@@ -79,6 +93,21 @@ def main():
     unknown_perc = unknown['Count'] / r_counts['Count']
     unknown['Percentage'] = unknown_perc * 100
     #print(unknown)
+
+    fig, ax = plt.subplots()
+    sns.lineplot(data=ai_an, x='Year', y='Percentage', label='American Indian/Alaskan Native', ax=ax, linestyle="dashed")
+    sns.lineplot(data=asian, x='Year', y='Percentage', label='Asian', ax=ax)
+    sns.lineplot(data=black, x='Year', y='Percentage', label='Black', ax=ax)
+    sns.lineplot(data=latine, x='Year', y='Percentage', label='Latinx', ax=ax)
+    sns.lineplot(data=nh_pi, x='Year', y='Percentage', label='Native Hawaiian/Pacific Islander', ax=ax)
+    sns.lineplot(data=white, x='Year', y='Percentage', label='White', ax=ax)
+    sns.lineplot(data=multi_r, x='Year', y='Percentage', label='Multiracial', ax=ax)
+    sns.lineplot(data=unknown, x='Year', y='Percentage', label='Unknown', ax=ax, linestyle="dotted")
+    plt.xlabel('Year')
+    plt.ylabel('Percentage Race')
+    plt.title("Race Breakdown of People Living with HIV over Time")
+    plt.savefig('line_plot_race.png', bbox_inches='tight')
+
 
 if __name__ == '__main__':
     main()
