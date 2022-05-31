@@ -160,7 +160,7 @@ def main():
     sns.lineplot(data=unknown_risk, x='Year', y='Percentage', label='Unknown Risk', ax=ax3)
     sns.lineplot(data=other, x='Year', y='Percentage', label='Other', ax=ax3)
     plt.xlabel('Year')
-    plt.ylabel('Percentage Transmissino')
+    plt.ylabel('Percentage Transmission')
     plt.title("Transmission Breakdown of People Living with HIV over Time")
     plt.savefig('line_plot_transmission.png', bbox_inches='tight')
 
