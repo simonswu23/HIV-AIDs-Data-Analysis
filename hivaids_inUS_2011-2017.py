@@ -16,7 +16,6 @@ def gender(hiv_data):
     of different genders living with HIV/AIDS from 2011 to
     2017. Saves that graph as 'line_plot_gender.png'
     """
-    # By Gender
     g_counts = hiv_data[hiv_data['Category'] == 'Current Gender']
     g_counts = g_counts.groupby('Year')['Count'].sum().reset_index()
     #print(g_counts)
@@ -68,7 +67,6 @@ def race(hiv_data):
     2017. Saves that graph as 'line_plot_race.png'
     """
 
-    # By Race
     r_counts = hiv_data[hiv_data['Category'] == 'Race/Ethnicity']
     r_counts = r_counts.groupby('Year')['Count'].sum().reset_index()
     #print(r_counts)
