@@ -3,9 +3,16 @@
 import pandas as pd
 import geopandas as gpd
 import numpy as np
+<<<<<<< HEAD
 # import plotly
 # import plotly.graph_objs as go
 # import plotly.plotly as py
+=======
+import plotly
+# import plotly.graph_objs as go
+# import plotly.plotly as py
+
+>>>>>>> 9d3a644023a8c4e34d01888425b2ca720b9b2ce1
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -19,6 +26,7 @@ sns.set()
 def load_in_data(art_coverage_by_country, persons_living_with_HIVAIDS,
                  group_countries, countries, living):
     """
+<<<<<<< HEAD
     These five datasets are what we used for our data on HIV/AIDS.
     art_coverage_by_country_pd gives us the countries and the estimated number
     of cases of HIV/AIDS that have been reported, the number of people
@@ -35,6 +43,12 @@ def load_in_data(art_coverage_by_country, persons_living_with_HIVAIDS,
     deaths, incidence, and prevalence. living_pd dataset explains the countries
     from 2000 to 2020 estimated number of peopleliving with HIV. countries_gpd
     gives us the shape and information of the countires.
+=======
+    This loads data for the certain datasets. Will add more info abot each
+    dataset in a bit.The data is not joined it is up to the person working
+    on it to join what they need.
+    results:
+>>>>>>> 9d3a644023a8c4e34d01888425b2ca720b9b2ce1
     """
     art_coverage_by_country_pd = pd.read_csv(art_coverage_by_country)
     persons_living_with_HIVAIDS_pd = pd.read_excel(persons_living_with_HIVAIDS)
@@ -64,6 +78,7 @@ def merged_data(files):
     print(art_coverage_country_continent.columns)
     human_info = gpd.GeoDataFrame(countries.merge(group_countries, left_on='SOVEREIGNT', right_on="Entity"))
     print(human_info.columns)
+<<<<<<< HEAD
 
 
 def art_coverage_by_continent(files):
@@ -121,11 +136,50 @@ def human_info_overall(files):
     plt.title('Overall Deaths, Incidence, and Prevalence in Each Continent')
     plt.xticks(rotation=25)
     plt.ticklabel_format(style='plain', axis='y')
+=======
+
+
+def art_coverage_by_continent(files):
+    art_coverage_by_country = files[0]
+    countries = files[3]
+    # if the amount of ART accessibility in North America differs from that in a region such as Africa.
+    countries = countries.loc[:, ['SOVEREIGNT', 'geometry', 'CONTINENT']]
+    art_coverage_country_continent = gpd.GeoDataFrame(art_coverage_by_country.merge(countries, left_on='Country',
+                                                      right_on='SOVEREIGNT'))
+    art_coverage_continent = art_coverage_country_continent.dissolve(by="CONTINENT", aggfunc="sum")
+
+    art_reset = art_coverage_continent.reset_index()
+    sns.relplot(data=art_reset, x="CONTINENT", y="Estimated ART coverage among people living with HIV (%)_median", kind="line", hue="CONTINENT")
+    plt.savefig("Estimated ART coverage among people living with HIV (%)", bbox_inches='tight')
+    plt.show()
+
+
+def human_info_overall(files):
+    group_countries = files[2]
+    countries = files[3]
+    human_info = gpd.GeoDataFrame(countries.merge(group_countries, left_on='SOVEREIGNT', right_on="Entity"))
+    human_info_continent = human_info.dissolve(by="CONTINENT", aggfunc="sum")
+    human_info_continent_reset = human_info_continent.reset_index()
+
+    print(human_info_continent_reset.columns)
+
+    fig, [[ax1], [ax2], [ax3]] = plt.subplots(1, 1, 1, figsize=(20, 10))
+    human_info_continent.plot(ax=ax1, column="Deaths - HIV/AIDS - Sex: Both - Age: All Ages (Number)", legend=True, vmin=0,
+                              vmax=1)
+    human_info_continent.plot(ax=ax2, column="Incidence - HIV/AIDS - Sex: Both - Age: All Ages (Number)", legend=True, vmin=0,
+                              vmax=1)
+    human_info_continent.plot(ax=ax3, column="Prevalence - HIV/AIDS - Sex: Both - Age: All Ages (Number)", legend=True, vmin=0,
+                              vmax=1)
+    ax1.set_title('Overall Deaths in Each Continent')
+    ax2.set_title('Overall Incidence in Each Continent')
+    ax3.set_title('Overall Prevalence in Each Continent')
+>>>>>>> 9d3a644023a8c4e34d01888425b2ca720b9b2ce1
     plt.savefig("Overall Facts in Each Continenet.png")
     plt.show()
 
 
 def contintent_HIV_AID(files):
+<<<<<<< HEAD
     """
     For this graph, we wanted to see which continents have the highest number
     of people living with HIV_median. First, we grouped the countries into
@@ -149,6 +203,20 @@ def contintent_HIV_AID(files):
     plt.title('Estimated number of people living with HIV') # the find year 
     plt.ylabel('Estimated number of people living with HIV')
     plt.show()
+=======
+    art_coverage_by_country = files[0]
+    countries = files[3]
+    countries = countries.loc[:, ['SOVEREIGNT', 'geometry', 'CONTINENT']]
+    art_coverage_continent = gpd.GeoDataFrame(art_coverage_by_country.merge(countries, left_on='Country',
+                                              right_on='SOVEREIGNT'))
+    people_living_with_HIV_by_continents = art_coverage_continent.dissolve(by="CONTINENT", aggfunc="sum")
+    people_living_with_HIV_by_continents_reset = people_living_with_HIV_by_continents.reset_index()
+
+    print(art_coverage_continent.columns)
+    # sns.relplot(data=people_living_with_HIV_by_continents_reset, x="CONTINENT", y="Estimated number of people living with HIV_median", kind="line", hue="CONTINENT")
+    # plt.savefig('Estimated number of people living with HIV', bbox_inches='tight')
+    # plt.show()
+>>>>>>> 9d3a644023a8c4e34d01888425b2ca720b9b2ce1
 
 
 def slider(files):
@@ -171,6 +239,7 @@ def slider(files):
 
     data_slider = []
     for year in estimated_num_people_living_by_country['Period'].unique():
+<<<<<<< HEAD
         df_segmented = estimated_num_people_living_by_country[(['Period']== year)]
 
         for col in df_segmented.columns:
@@ -194,6 +263,31 @@ def slider(files):
         step['args'][1][i] = True
         steps.append(step)
 
+=======
+        df_segmented =  estimated_num_people_living_by_country[(['Period']== year)]
+
+        for col in df_segmented.columns:
+            df_segmented[col] = df_segmented[col].astype(str)
+
+        data_each_yr = dict(
+                            type='choropleth',
+                            locations = df_segmented['SOVEREIGNT'],
+                            z=df_segmented['FactValueNumeric'].astype(float),
+                            # locationmode='USA-states',
+                            colorscale = scl,
+                            colorbar= {'title':'# Living People'})
+
+        data_slider.append(data_each_yr)
+
+    steps = []
+    for i in range(len(data_slider)):
+        step = dict(method='restyle',
+                    args=['visible', [False] * len(data_slider)],
+                    label='Year {}'.format(i + 2000))
+        step['args'][1][i] = True
+        steps.append(step)
+
+>>>>>>> 9d3a644023a8c4e34d01888425b2ca720b9b2ce1
     sliders = [dict(active=0, pad={"t": 1}, steps=steps)]
 
     layout = dict(title ='# of People Living with HIV-AIDS',
@@ -208,11 +302,20 @@ def main():
                          '/Users/jainabajawara/Downloads/deaths-and-new-cases-of-hiv.csv',
                          '/Users/jainabajawara/Downloads/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp',
                          '/Users/jainabajawara/Downloads/data.csv')
+<<<<<<< HEAD
     # merged_data(files)
     # art_coverage_by_continent(files)
     # human_info_overall(files)
     # contintent_HIV_AID(files)
     slider(files)
+=======
+
+    # merged_data(files)
+    # art_coverage_by_continent(files)
+    # contintent_HIV_AID(files)
+    # human_info_overall(files)
+    # slider(files)
+>>>>>>> 9d3a644023a8c4e34d01888425b2ca720b9b2ce1
 
 
 if __name__ == '__main__':
