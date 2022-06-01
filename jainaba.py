@@ -2,6 +2,11 @@
 # from unicodedata import category
 import pandas as pd
 import geopandas as gpd
+import numpy as np
+import plotly
+# import plotly.graph_objs as go
+# import plotly.plotly as py
+
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -10,7 +15,7 @@ sns.set()
 
 
 def load_in_data(art_coverage_by_country, persons_living_with_HIVAIDS,
-                 group_countries, countries):
+                 group_countries, countries, living):
     """
     This loads data for the certain datasets. Will add more info abot each
     dataset in a bit.The data is not joined it is up to the person working
@@ -21,8 +26,10 @@ def load_in_data(art_coverage_by_country, persons_living_with_HIVAIDS,
     persons_living_with_HIVAIDS_pd = pd.read_excel(persons_living_with_HIVAIDS)
     group_countries_pd = pd.read_csv(group_countries)
     countries_gpd = gpd.read_file(countries)
+    living_pd = pd.read_csv(living)
 
-    return art_coverage_by_country_pd, persons_living_with_HIVAIDS_pd, group_countries_pd, countries_gpd
+
+    return art_coverage_by_country_pd, persons_living_with_HIVAIDS_pd, group_countries_pd, countries_gpd, living_pd
 
 
 def merged_data(files):
@@ -89,20 +96,76 @@ def contintent_HIV_AID(files):
                                               right_on='SOVEREIGNT'))
     people_living_with_HIV_by_continents = art_coverage_continent.dissolve(by="CONTINENT", aggfunc="sum")
     people_living_with_HIV_by_continents_reset = people_living_with_HIV_by_continents.reset_index()
-    sns.relplot(data=people_living_with_HIV_by_continents_reset, x="CONTINENT", y="Estimated number of people living with HIV_median", kind="line", hue="CONTINENT")
-    plt.savefig('Estimated number of people living with HIV', bbox_inches='tight')
-    plt.show()
 
+    print(art_coverage_continent.columns)
+    # sns.relplot(data=people_living_with_HIV_by_continents_reset, x="CONTINENT", y="Estimated number of people living with HIV_median", kind="line", hue="CONTINENT")
+    # plt.savefig('Estimated number of people living with HIV', bbox_inches='tight')
+    # plt.show()
+
+
+def slider(files):
+    countries = files[3]
+    estimated_number_of_people_living = files[4]
+
+    estimated_num_people_living = estimated_number_of_people_living .loc[:, [ 'Location', 'Period','FactValueNumeric']]
+
+    countries = countries.loc[:, ['SOVEREIGNT', 'geometry', 'CONTINENT']]
+
+    estimated_num_people_living_by_country = gpd.GeoDataFrame(estimated_num_people_living.merge(countries, left_on='Location',
+                                              right_on='SOVEREIGNT'))
+
+
+    year = 2000
+
+    # your color-scale
+    scl = [[0.0, '#ffffff'],[0.2, '#b4a8ce'],[0.4, '#8573a9'],
+        [0.6, '#7159a3'],[0.8, '#5732a1'],[1.0, '#2c0579']] # purples
+
+    data_slider = []
+    for year in estimated_num_people_living_by_country['Period'].unique():
+        df_segmented =  estimated_num_people_living_by_country[(['Period']== year)]
+
+        for col in df_segmented.columns:
+            df_segmented[col] = df_segmented[col].astype(str)
+
+        data_each_yr = dict(
+                            type='choropleth',
+                            locations = df_segmented['SOVEREIGNT'],
+                            z=df_segmented['FactValueNumeric'].astype(float),
+                            # locationmode='USA-states',
+                            colorscale = scl,
+                            colorbar= {'title':'# Living People'})
+
+        data_slider.append(data_each_yr)
+
+    steps = []
+    for i in range(len(data_slider)):
+        step = dict(method='restyle',
+                    args=['visible', [False] * len(data_slider)],
+                    label='Year {}'.format(i + 2000))
+        step['args'][1][i] = True
+        steps.append(step)
+
+    sliders = [dict(active=0, pad={"t": 1}, steps=steps)]
+
+    layout = dict(title ='# of People Living with HIV-AIDS',
+                sliders=sliders)
+
+    fig = dict(data=data_slider, layout=layout)
+    periscope.plotly(fig)
 
 def main():
     files = load_in_data('/Users/jainabajawara/Downloads/art_coverage_by_country_clean.csv.xls',
                          '/Users/jainabajawara/Downloads/persons-living-with-hiv-aids-2011-2017.csv',
                          '/Users/jainabajawara/Downloads/deaths-and-new-cases-of-hiv.csv',
-                         '/Users/jainabajawara/Downloads/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp')
+                         '/Users/jainabajawara/Downloads/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp',
+                         '/Users/jainabajawara/Downloads/data.csv')
+
     # merged_data(files)
     # art_coverage_by_continent(files)
     # contintent_HIV_AID(files)
-    human_info_overall(files)
+    # human_info_overall(files)
+    # slider(files)
 
 
 if __name__ == '__main__':
