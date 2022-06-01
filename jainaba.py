@@ -1,4 +1,5 @@
 
+# from unicodedata import category
 import pandas as pd
 import geopandas as gpd
 
@@ -14,6 +15,7 @@ def load_in_data(art_coverage_by_country, persons_living_with_HIVAIDS,
     This loads data for the certain datasets. Will add more info abot each
     dataset in a bit.The data is not joined it is up to the person working
     on it to join what they need.
+    results:
     """
     art_coverage_by_country_pd = pd.read_csv(art_coverage_by_country)
     persons_living_with_HIVAIDS_pd = pd.read_excel(persons_living_with_HIVAIDS)
@@ -27,63 +29,69 @@ def merged_data(files):
     """
 
     """
-
     # Figure out merge issue
     art_coverage_by_country = files[0]
-    persons_living_with_HIVAIDS = files[1]
     group_countries = files[2]
     countries = files[3]
-
     art_coverage_by_country = art_coverage_by_country.loc[:, art_coverage_by_country.columns != 'WHO Region']
     countries = countries.loc[:, ['SOVEREIGNT', 'geometry', 'CONTINENT']]
-
     art_coverage_country_continent = gpd.GeoDataFrame(art_coverage_by_country.merge(countries, left_on='Country',
                                                       right_on='SOVEREIGNT'))
     art_coverage_continent = art_coverage_country_continent.dissolve(by="CONTINENT", aggfunc="sum")
     print(art_coverage_country_continent.columns)
     human_info = gpd.GeoDataFrame(countries.merge(group_countries, left_on='SOVEREIGNT', right_on="Entity"))
-
     print(human_info.columns)
-"""
-“How does access to ART (HIV/AIDS treatment) compare across different countries?” 
 
-# if the amount of ART accessibility in North America differs from that in a region such as Africa. 
 
-# different countries and the estimated number of cases of HIV/AIDS that have been reported,the number of people receiving antiretroviral therapy (ART)
-
-# the estimated ART coverage among people living with HIV.
-
-Also looking at current gender, race/ethnicity with HIV/AIDS.   
-
-# This will allow us  to investigate if there is a link between ART access and transmission and mortality rates on different continents.
-
-"""
-def contintent_art(files):
+def art_coverage_by_continent(files):
     art_coverage_by_country = files[0]
-    persons_living_with_HIVAIDS = files[1]
-    group_countries = files[2]
     countries = files[3]
-
-    # if the amount of ART accessibility in North America differs from that in a region such as Africa. 
+    # if the amount of ART accessibility in North America differs from that in a region such as Africa.
     countries = countries.loc[:, ['SOVEREIGNT', 'geometry', 'CONTINENT']]
     art_coverage_country_continent = gpd.GeoDataFrame(art_coverage_by_country.merge(countries, left_on='Country',
                                                       right_on='SOVEREIGNT'))
     art_coverage_continent = art_coverage_country_continent.dissolve(by="CONTINENT", aggfunc="sum")
-    # print(art_coverage_continent.columns)
 
-    recieving_art = art_coverage_country_continent['Reported number of people receiving ART']
+    art_reset = art_coverage_continent.reset_index()
+    sns.relplot(data=art_reset, x="CONTINENT", y="Estimated ART coverage among people living with HIV (%)_median", kind="line", hue="CONTINENT")
+    plt.savefig("Estimated ART coverage among people living with HIV (%)", bbox_inches='tight')
+    plt.show()
 
-    print(art_coverage_country_continent.columns)
 
-
-    # if the amount of ART accessibility in North America differs from that in a region such as Africa for men vs women
-
+def human_info_overall(files):
+    group_countries = files[2]
+    countries = files[3]
     human_info = gpd.GeoDataFrame(countries.merge(group_countries, left_on='SOVEREIGNT', right_on="Entity"))
+    human_info_continent = human_info.dissolve(by="CONTINENT", aggfunc="sum")
+    human_info_continent_reset = human_info_continent.reset_index()
 
-    # print(human_info.columns)
+    print(human_info_continent_reset.columns)
 
-    
+    fig, [[ax1], [ax2], [ax3]] = plt.subplots(1, 1, 1, figsize=(20, 10))
+    human_info_continent.plot(ax=ax1, column="Deaths - HIV/AIDS - Sex: Both - Age: All Ages (Number)", legend=True, vmin=0,
+                              vmax=1)
+    human_info_continent.plot(ax=ax2, column="Incidence - HIV/AIDS - Sex: Both - Age: All Ages (Number)", legend=True, vmin=0,
+                              vmax=1)
+    human_info_continent.plot(ax=ax3, column="Prevalence - HIV/AIDS - Sex: Both - Age: All Ages (Number)", legend=True, vmin=0,
+                              vmax=1)
+    ax1.set_title('Overall Deaths in Each Continent')
+    ax2.set_title('Overall Incidence in Each Continent')
+    ax3.set_title('Overall Prevalence in Each Continent')
+    plt.savefig("Overall Facts in Each Continenet.png")
+    plt.show()
 
+
+def contintent_HIV_AID(files):
+    art_coverage_by_country = files[0]
+    countries = files[3]
+    countries = countries.loc[:, ['SOVEREIGNT', 'geometry', 'CONTINENT']]
+    art_coverage_continent = gpd.GeoDataFrame(art_coverage_by_country.merge(countries, left_on='Country',
+                                              right_on='SOVEREIGNT'))
+    people_living_with_HIV_by_continents = art_coverage_continent.dissolve(by="CONTINENT", aggfunc="sum")
+    people_living_with_HIV_by_continents_reset = people_living_with_HIV_by_continents.reset_index()
+    sns.relplot(data=people_living_with_HIV_by_continents_reset, x="CONTINENT", y="Estimated number of people living with HIV_median", kind="line", hue="CONTINENT")
+    plt.savefig('Estimated number of people living with HIV', bbox_inches='tight')
+    plt.show()
 
 
 def main():
@@ -92,8 +100,9 @@ def main():
                          '/Users/jainabajawara/Downloads/deaths-and-new-cases-of-hiv.csv',
                          '/Users/jainabajawara/Downloads/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp')
     # merged_data(files)
-    contintent_art(files)
-
+    # art_coverage_by_continent(files)
+    # contintent_HIV_AID(files)
+    human_info_overall(files)
 
 
 if __name__ == '__main__':
