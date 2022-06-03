@@ -1,4 +1,5 @@
 # HIV-AIDs-Data-Analysis
+[add brief description of our overall project]
 
 ## For the 2011-2017 US HIV/AIDs Data:
 - dataset used should be labelled as 'persons-living-with-hiv-aids-2011-2017.csv' in directory
