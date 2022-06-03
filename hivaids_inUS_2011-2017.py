@@ -57,6 +57,7 @@ def gender(hiv_data):
     plt.xlabel('Year')
     plt.ylabel('Percentage Gender')
     plt.title("Gender Breakdown of People Living with HIV over Time")
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
     plt.savefig('line_plot_gender.png', bbox_inches='tight')
 
 def race(hiv_data):
@@ -185,6 +186,7 @@ def m_transmission(hiv_data):
     plt.xlabel('Year')
     plt.ylabel('Percentage Transmission')
     plt.title("Male Adult and Adolescent HIV Transmission over Time")
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
     plt.savefig('line_plot_transmission_m.png', bbox_inches='tight')
 
 def f_transmission(hiv_data):
@@ -235,6 +237,7 @@ def f_transmission(hiv_data):
     plt.xlabel('Year')
     plt.ylabel('Percentage Transmission')
     plt.title("Female Adult and Adolescent HIV Transmission over Time")
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
     plt.savefig('line_plot_transmission_f.png', bbox_inches='tight')
 
 
