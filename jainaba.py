@@ -220,6 +220,23 @@ def contintent_HIV_AID(files):
 
 
 def slider(files):
+    """
+    We wanted to create a map of the world to see if HIV/AIDS is similar or
+    different in all parts of the world. We also wanted to see if the infection
+    rate had increased or decreased from 2000 to 2020. The dataset already had
+    it in years, so from 2000, 2005, 2010, 2015, and 2020, it had no data for
+    all the years or some of the countries. From the map, we can see that South
+    Africa's cases were high in 2000, but from 2005 to 2020, South Africa's
+    cases increased. South Africa also had the highest HIV/AIDS infection rates
+    for 20 years out of other countries. For India, the colors on the map
+    changed each year, and I thought it was increasing, but the fact-value
+    numeric increased, so in 2000 the infected was around 3.5M, and in 2005,
+    it was still 3.5M, and in 2010 it was 3M and 2015 it was around 2.5M, and
+    in 2020 it was around 2.5M. It decreased slowly over the years by 1M, but
+    we also need to factor in the value numeric when we look at the years. The
+    map is interactive, so if you hover over the country, it will tell you the
+    name, year, and cases.
+    """
     countries = files[3]
     estimated_number_of_people_living = files[4]
 
