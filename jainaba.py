@@ -204,22 +204,18 @@ def slider(files):
 
 
 def main():
-    art_coverage_by_country = ('/Users/jainabajawara/Downloads/'
-                               'art_coverage_by_country_clean.csv.xls')
-    living_hiv_aids_2011_2017 = ('/Users/jainabajawara/Downloads/'
-                                 'persons-living-with-hiv-aids-2011-2017.csv')
-    deaths_and_new_cases_of_hiv = ('/Users/jainabajawara/Downloads/'
-                                   'deaths-and-new-cases-of-hiv.csv')
-    countries = ('/Users/jainabajawara/Downloads/'
-                 'ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp')
-    data = '/Users/jainabajawara/Downloads/data.csv'
+    art_coverage_by_country = 'art_coverage_by_country_clean.csv.xls'
+    living_hiv_aids_2011_2017 = 'persons-living-with-hiv-aids-2011-2017.csv'
+    deaths_and_new_cases_of_hiv = 'deaths-and-new-cases-of-hiv.csv'
+    countries = 'geometries/ne_110m_admin_0_countries.shp'
+    data = 'data.csv'
 
     files = load_in_data(art_coverage_by_country, living_hiv_aids_2011_2017,
                          deaths_and_new_cases_of_hiv, countries, data)
     # merged_data(files)
     # art_coverage_by_continent(files)
     # human_info_overall(files)
-    # contintent_HIV_AID(files)
+    # continent_HIV_AID(files)
     slider(files)
 
 
