@@ -45,7 +45,8 @@ def gender(hiv_data, show_data=False,
     nb['Percentage'] = nb_perc * 100
 
     if show_data:
-        all_gender = pd.concat([t_men, t_women, c_men, c_women, nb]).reset_index()
+        all_gender = pd.concat([t_men, t_women, c_men,
+                                c_women, nb]).reset_index()
         print(all_gender)
 
     fig, ax1 = plt.subplots()
@@ -197,7 +198,8 @@ def m_transmission(hiv_data, show_data=False,
 
     if show_data:
         all_transmission_m = pd.concat([mmsc, idu, mmsc_idu, hrh, het,
-                              perinatal, unknown_risk, other]).reset_index()
+                                        perinatal, unknown_risk,
+                                        other]).reset_index()
         print(all_transmission_m)
 
     fig, ax3 = plt.subplots()
