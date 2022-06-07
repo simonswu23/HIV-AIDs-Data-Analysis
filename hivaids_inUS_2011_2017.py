@@ -10,7 +10,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def gender(hiv_data):
+def gender(hiv_data, show_data=False,
+           png_name='line_plot_gender.png'):
     """
     Takes in the processed hiv/aids dataset
     and plots a line graph of the percent representation
@@ -40,6 +41,10 @@ def gender(hiv_data):
     nb_perc = nb['Count'] / g_counts['Count']
     nb['Percentage'] = nb_perc * 100
 
+    if show_data:
+        all_gender = pd.concat([t_men, t_women, c_men, c_women, nb]).reset_index()
+        print(all_gender)
+
     fig, ax1 = plt.subplots()
     sns.lineplot(data=c_men, x='Year', y='Percentage',
                  label='Cis Men', ax=ax1)
@@ -53,12 +58,13 @@ def gender(hiv_data):
                  label='Alternative Gender', ax=ax1, linestyle="dashed")
     plt.xlabel('Year')
     plt.ylabel('Percentage Gender')
-    plt.title("Gender Breakdown of People Living with HIV over Time")
+    plt.title('Gender Breakdown of People Living with HIV over Time')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
-    plt.savefig('line_plot_gender.png', bbox_inches='tight')
+    plt.savefig(png_name, bbox_inches='tight')
 
 
-def race(hiv_data):
+def race(hiv_data, show_data=False,
+         png_name='line_plot_race.png'):
     """
     Takes in the processed hiv/aids dataset
     and plots a line graph of the percent representation
@@ -104,6 +110,11 @@ def race(hiv_data):
     unknown_perc = unknown['Count'] / r_counts['Count']
     unknown['Percentage'] = unknown_perc * 100
 
+    if show_data:
+        all_race = pd.concat([ai_an, asian, black, latine, nh_pi,
+                              white, multi_r, unknown]).reset_index()
+        print(all_race)
+
     fig, ax2 = plt.subplots()
     sns.lineplot(data=ai_an, x='Year', y='Percentage',
                  label='American Indian/Alaskan Native',
@@ -122,10 +133,11 @@ def race(hiv_data):
     plt.ylabel('Percentage Race')
     plt.title("Race Breakdown of People Living with HIV over Time")
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
-    plt.savefig('line_plot_race.png', bbox_inches='tight')
+    plt.savefig(png_name, bbox_inches='tight')
 
 
-def m_transmission(hiv_data):
+def m_transmission(hiv_data, show_data=False,
+                   png_name='line_plot_transmission_m.png'):
     """
     Takes in the processed hiv/aids dataset and plots
     a line graph of the percent representation of HIV/AIDS
@@ -174,6 +186,11 @@ def m_transmission(hiv_data):
     other_perc = other['Count'] / transmission['Count']
     other['Percentage'] = other_perc * 100
 
+    if show_data:
+        all_transmission_m = pd.concat([mmsc, idu, mmsc_idu, hrh, het,
+                              perinatal, unknown_risk, other]).reset_index()
+        print(all_transmission_m)
+
     fig, ax3 = plt.subplots()
     sns.lineplot(data=mmsc, x='Year', y='Percentage',
                  label='Male-Male Sexual Contact (MMSC)', ax=ax3)
@@ -195,10 +212,11 @@ def m_transmission(hiv_data):
     plt.ylabel('Percentage Transmission')
     plt.title("Male Adult and Adolescent HIV Transmission over Time")
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
-    plt.savefig('line_plot_transmission_m.png', bbox_inches='tight')
+    plt.savefig(png_name, bbox_inches='tight')
 
 
-def f_transmission(hiv_data):
+def f_transmission(hiv_data, show_data=False,
+                   png_name='line_plot_transmission_f.png'):
     """
     Takes in the processed hiv/aids dataset and plots
     a line graph of the percent representation of HIV/AIDS
@@ -238,24 +256,29 @@ def f_transmission(hiv_data):
     other_perc = other['Count'] / transmission['Count']
     other['Percentage'] = other_perc * 100
 
-    fig, ax3 = plt.subplots()
+    if show_data:
+        all_transmission_f = pd.concat([idu, hrh, het, perinatal,
+                                        unknown_risk, other]).reset_index()
+        print(all_transmission_f)
+
+    fig, ax4 = plt.subplots()
     sns.lineplot(data=idu, x='Year', y='Percentage',
-                 label='Injection Drug Use (IDU)', ax=ax3)
+                 label='Injection Drug Use (IDU)', ax=ax4)
     sns.lineplot(data=hrh, x='Year', y='Percentage',
-                 label='High-Risk Heterosexual Contact', ax=ax3)
+                 label='High-Risk Heterosexual Contact', ax=ax4)
     sns.lineplot(data=het, x='Year', y='Percentage',
-                 label='Heterosexual Contact (non high-risk)', ax=ax3)
+                 label='Heterosexual Contact (non high-risk)', ax=ax4)
     sns.lineplot(data=perinatal, x='Year', y='Percentage',
-                 label='Perinatal', ax=ax3)
+                 label='Perinatal', ax=ax4)
     sns.lineplot(data=unknown_risk, x='Year', y='Percentage',
-                 label='Unknown Risk', ax=ax3)
+                 label='Unknown Risk', ax=ax4)
     sns.lineplot(data=other, x='Year', y='Percentage',
-                 label='Other', ax=ax3)
+                 label='Other', ax=ax4)
     plt.xlabel('Year')
     plt.ylabel('Percentage Transmission')
     plt.title("Female Adult and Adolescent HIV Transmission over Time")
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
-    plt.savefig('line_plot_transmission_f.png', bbox_inches='tight')
+    plt.savefig(png_name, bbox_inches='tight')
 
 
 def main():

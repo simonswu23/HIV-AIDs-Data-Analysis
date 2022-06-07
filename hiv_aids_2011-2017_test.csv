@@ -1,0 +1,57 @@
+﻿Year,Category,Group,Count
+0,Current Gender,Transgender women,1
+1,Current Gender,Transgender women,1
+1,Current Gender,Transgender men,2
+1,Current Gender,Alternative Gender,100
+1,Current Gender,Cisgender men,0
+1,Current Gender,Cisgender women,0
+2,Current Gender,Transgender women,1
+2,Current Gender,Transgender men,2
+2,Current Gender,Alternative Gender,100
+2,Current Gender,Cisgender men,0
+2,Current Gender,Cisgender women,1
+3,Current Gender,Transgender women,1
+3,Current Gender,Transgender men,2
+3,Current Gender,Alternative Gender,3
+0,Race/Ethnicity,American Indian/Alaska Native,1
+1,Race/Ethnicity,American Indian/Alaska Native,1
+1,Race/Ethnicity,Native Hawaiian/Pacific Islander,2
+1,Race/Ethnicity,Black/African American,100
+1,Race/Ethnicity,Asian*,0
+1,Race/Ethnicity,Latinx*,0
+2,Race/Ethnicity,American Indian/Alaska Native,1
+2,Race/Ethnicity,Native Hawaiian/Pacific Islander,2
+2,Race/Ethnicity,Black/African American,100
+2,Race/Ethnicity,Asian*,0
+2,Race/Ethnicity,Latinx*,1
+3,Race/Ethnicity,American Indian/Alaska Native,1
+3,Race/Ethnicity,Native Hawaiian/Pacific Islander,2
+3,Race/Ethnicity,Black/African American,3
+0,Transmission Category: Male Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+1,Transmission Category: Male Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+1,Transmission Category: Male Adult or Adolescent,Heterosexual contact (Non-HRH)***,2
+1,Transmission Category: Male Adult or Adolescent,Perinatal,100
+1,Transmission Category: Male Adult or Adolescent,Unknown risk,0
+1,Transmission Category: Male Adult or Adolescent,Other****,0
+2,Transmission Category: Male Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+2,Transmission Category: Male Adult or Adolescent,Heterosexual contact (Non-HRH)***,2
+2,Transmission Category: Male Adult or Adolescent,Perinatal,100
+2,Transmission Category: Male Adult or Adolescent,Unknown risk,0
+2,Transmission Category: Male Adult or Adolescent,Other****,1
+3,Transmission Category: Male Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+3,Transmission Category: Male Adult or Adolescent,Heterosexual contact (Non-HRH)***,2
+3,Transmission Category: Male Adult or Adolescent,Perinatal,3
+0,Transmission Category: Female Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+1,Transmission Category: Female Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+1,Transmission Category: Female Adult or Adolescent,Heterosexual contact (Non-HRH)***,2
+1,Transmission Category: Female Adult or Adolescent,Perinatal,100
+1,Transmission Category: Female Adult or Adolescent,Unknown risk,0
+1,Transmission Category: Female Adult or Adolescent,Other****,0
+2,Transmission Category: Female Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+2,Transmission Category: Female Adult or Adolescent,Heterosexual contact (Non-HRH)***,2
+2,Transmission Category: Female Adult or Adolescent,Perinatal,100
+2,Transmission Category: Female Adult or Adolescent,Unknown risk,0
+2,Transmission Category: Female Adult or Adolescent,Other****,1
+3,Transmission Category: Female Adult or Adolescent,High-risk heterosexual contact (HRH)**,1
+3,Transmission Category: Female Adult or Adolescent,Heterosexual contact (Non-HRH)***,2
+3,Transmission Category: Female Adult or Adolescent,Perinatal,3
