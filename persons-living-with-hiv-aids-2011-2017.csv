@@ -1,6 +1,6 @@
 Year,Category,Group,Count
 2011,Age at Year End,0-11,169
-2011,Age at Year End,12-14,87
+2011,Age at Year End,14-Dec,87
 2011,Age at Year End,15-17,180
 2011,Age at Year End,18-19,315
 2011,Age at Year End,20-24,2971
@@ -45,7 +45,7 @@ Year,Category,Group,Count
 2011,Transmission Category: Child (<12 Years Old at the End of Year),Unknown risk,18
 2011,Transmission Category: Child (<12 Years Old at the End of Year),Other****,1
 2012,Age at Year End,0-11,154
-2012,Age at Year End,12-14,79
+2012,Age at Year End,14-Dec,79
 2012,Age at Year End,15-17,159
 2012,Age at Year End,18-19,307
 2012,Age at Year End,20-24,3025
@@ -90,7 +90,7 @@ Year,Category,Group,Count
 2012,Transmission Category: Child (<12 Years Old at the End of Year),Unknown risk,19
 2012,Transmission Category: Child (<12 Years Old at the End of Year),Other****,1
 2013,Age at Year End,0-11,156
-2013,Age at Year End,12-14,73
+2013,Age at Year End,14-Dec,73
 2013,Age at Year End,15-17,142
 2013,Age at Year End,18-19,283
 2013,Age at Year End,20-24,3008
@@ -135,7 +135,7 @@ Year,Category,Group,Count
 2013,Transmission Category: Child (<12 Years Old at the End of Year),Unknown risk,26
 2013,Transmission Category: Child (<12 Years Old at the End of Year),Other****,1
 2014,Age at Year End,0-11,152
-2014,Age at Year End,12-14,72
+2014,Age at Year End,14-Dec,72
 2014,Age at Year End,15-17,129
 2014,Age at Year End,18-19,247
 2014,Age at Year End,20-24,3074
@@ -180,7 +180,7 @@ Year,Category,Group,Count
 2014,Transmission Category: Child (<12 Years Old at the End of Year),Unknown risk,27
 2014,Transmission Category: Child (<12 Years Old at the End of Year),Other****,1
 2015,Age at Year End,0-11,139
-2015,Age at Year End,12-14,69
+2015,Age at Year End,14-Dec,69
 2015,Age at Year End,15-17,124
 2015,Age at Year End,18-19,255
 2015,Age at Year End,20-24,3098
@@ -225,7 +225,7 @@ Year,Category,Group,Count
 2015,Transmission Category: Child (<12 Years Old at the End of Year),Unknown risk,24
 2015,Transmission Category: Child (<12 Years Old at the End of Year),Other****,1
 2016,Age at Year End,0-11,124
-2016,Age at Year End,12-14,82
+2016,Age at Year End,14-Dec,82
 2016,Age at Year End,15-17,112
 2016,Age at Year End,18-19,249
 2016,Age at Year End,20-24,3088
@@ -270,7 +270,7 @@ Year,Category,Group,Count
 2016,Transmission Category: Child (<12 Years Old at the End of Year),Unknown risk,19
 2016,Transmission Category: Child (<12 Years Old at the End of Year),Other****,2
 2017,Age at Year End,0-11,110
-2017,Age at Year End,12-14,78
+2017,Age at Year End,14-Dec,78
 2017,Age at Year End,15-17,98
 2017,Age at Year End,18-19,239
 2017,Age at Year End,20-24,2950
