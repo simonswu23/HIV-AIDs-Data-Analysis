@@ -79,8 +79,9 @@ def art_coverage_by_continent(files):
     art_country = art_coverage_by_country.merge(countries, left_on='Country',
                                                 right_on='SOVEREIGNT')
 
-    art_coverage_continent = art_country.groupby("CONTINENT")
-    ["Estimated ART coverage among people living with HIV (%)_median"].sum()
+    estimate = "Estimated ART coverage among people living with HIV (%)_median"
+
+    art_coverage_continent = art_country.groupby("CONTINENT")[estimate].sum()
     art_coverage_continent.plot(kind="bar")
     plt.xticks(rotation=25)
     plt.title("Estimated ART coverage among people living with HIV (%)")
@@ -109,11 +110,14 @@ def human_info_overall(files):
     countries = countries.loc[:, ['SOVEREIGNT', "CONTINENT"]]
     info = (countries.merge(group_countries, left_on='SOVEREIGNT',
                             right_on="Entity"))
-    info = info.rename(columns={"Deaths - HIV/AIDS - Sex: Both - Age: All Ages (Number)":
+    n1 = "Deaths - HIV/AIDS - Sex: Both - Age: All Ages (Number)"
+    n2 = "Incidence - HIV/AIDS - Sex: Both - Age: All Ages (Number)"
+    n3 = "Prevalence - HIV/AIDS - Sex: Both - Age: All Ages (Number)"
+    info = info.rename(columns={n1:
                                 'Deaths',
-                                "Incidence - HIV/AIDS - Sex: Both - Age: All Ages (Number)":
+                                n2:
                                 "Incidence",
-                                "Prevalence - HIV/AIDS - Sex: Both - Age: All Ages (Number)":
+                                n3:
                                 'Prevalence'})
     print(info.columns)
     human_information = info.loc[:, ["CONTINENT",
@@ -128,7 +132,7 @@ def human_info_overall(files):
                                            "Prevalence"],
                          kind="bar")
     plt.title('Overall Deaths, Incidence, and Prevalence in Each Continent')
-    plt.xticks(rotation=25)
+    plt.xticks(fontsize=8, rotation=25)
     plt.ticklabel_format(style='plain', axis='y')
     plt.savefig("Overall Facts in Each Continenet.png")
     plt.show()
@@ -151,12 +155,13 @@ def contintent_HIV_AID(files):
     art_continent = art_coverage_by_country.merge(countries,
                                                   left_on='Country',
                                                   right_on='SOVEREIGNT')
-    HIV_continents = art_continent.groupby("CONTINENT")["Estimated number of people living with HIV_median"].sum()
+    estimate = "Estimated number of people living with HIV_median"
+    HIV_continents = art_continent.groupby("CONTINENT")[estimate].sum()
 
     HIV_continents.plot(kind="bar")
     plt.savefig('Estimated number of people living with HIV',
                 bbox_inches='tight')
-    plt.xticks(rotation=25)
+    # plt.xticks(rotation=10)
     plt.title('Estimated number of people living with HIV')  # the find year
     plt.ylabel('Estimated number of people living with HIV')
     plt.show()
@@ -204,19 +209,23 @@ def slider(files):
 
 
 def main():
-    art_coverage_by_country = 'art_coverage_by_country_clean.csv.xls'
-    living_hiv_aids_2011_2017 = 'persons-living-with-hiv-aids-2011-2017.csv'
-    deaths_and_new_cases_of_hiv = 'deaths-and-new-cases-of-hiv.csv'
-    countries = 'geometries/ne_110m_admin_0_countries.shp'
-    data = 'data.csv'
+    art_coverage_by_country = ('/Users/jainabajawara/Downloads/'
+                               'art_coverage_by_country_clean.csv.xls')
+    living_hiv_aids_2011_2017 = ('/Users/jainabajawara/Downloads/'
+                                 'persons-living-with-hiv-aids-2011-2017.csv')
+    deaths_and_new_cases_of_hiv = ('/Users/jainabajawara/Downloads/'
+                                   'deaths-and-new-cases-of-hiv.csv')
+    countries = ('/Users/jainabajawara/Downloads/'
+                 'ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp')
+    data = '/Users/jainabajawara/Downloads/data.csv'
 
     files = load_in_data(art_coverage_by_country, living_hiv_aids_2011_2017,
                          deaths_and_new_cases_of_hiv, countries, data)
     # merged_data(files)
     # art_coverage_by_continent(files)
-    # human_info_overall(files)
-    # continent_HIV_AID(files)
-    slider(files)
+    human_info_overall(files)
+    # contintent_HIV_AID(files)
+    # slider(files)
 
 
 if __name__ == '__main__':
