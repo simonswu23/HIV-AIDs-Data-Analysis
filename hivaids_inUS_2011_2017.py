@@ -16,7 +16,10 @@ def gender(hiv_data, show_data=False,
     Takes in the processed hiv/aids dataset
     and plots a line graph of the percent representation
     of different genders living with HIV/AIDS from 2011 to
-    2017. Saves that graph as 'line_plot_gender.png'
+    2017. Saves that graph as str png_name
+    (default is 'line_plot_gender.png')
+    show_data is a boolean that can print out the aggregated
+    dataset to console (default is False).
     """
     g_counts = hiv_data[hiv_data['Category'] == 'Current Gender']
     g_counts = g_counts.groupby('Year')['Count'].sum().reset_index()
@@ -69,7 +72,10 @@ def race(hiv_data, show_data=False,
     Takes in the processed hiv/aids dataset
     and plots a line graph of the percent representation
     of different races living with HIV/AIDS from 2011 to
-    2017. Saves that graph as 'line_plot_race.png'
+    2017.  Saves that graph as str png_name
+    (default is 'line_plot_race.png')
+    show_data is a boolean that can print out the aggregated
+    dataset to console (default is False).
     """
 
     r_counts = hiv_data[hiv_data['Category'] == 'Race/Ethnicity']
@@ -142,7 +148,10 @@ def m_transmission(hiv_data, show_data=False,
     Takes in the processed hiv/aids dataset and plots
     a line graph of the percent representation of HIV/AIDS
     transmissions for adult and adolescent males from 2011 to 2017.
-    Saves that graph as 'line_plot_gender.png'
+    Saves that graph as str png_name
+    (default is 'line_plot_transmission_m.png')
+    show_data is a boolean that can print out the aggregated
+    dataset to console (default is False).
     """
 
     transmission = hiv_data[hiv_data['Category'] ==
@@ -221,7 +230,10 @@ def f_transmission(hiv_data, show_data=False,
     Takes in the processed hiv/aids dataset and plots
     a line graph of the percent representation of HIV/AIDS
     transmissions for adult and adolescent females from 2011 to 2017.
-    Saves that graph as 'line_plot_gender.png'
+    Saves that graph as str png_name
+    (default is 'line_plot_transmission_f.png')
+    show_data is a boolean that can print out the aggregated
+    dataset to console (default is False).
     """
 
     tc_fm = 'Transmission Category: Female Adult or Adolescent'
