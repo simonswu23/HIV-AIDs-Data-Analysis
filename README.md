@@ -9,6 +9,9 @@ We wanted to look at HIV/AIDS and see if anything has changed over the years for
 - no new libraries needed for this module
 
 ## From the Number of people living with HIV AIDS and ART (Anti Retro-viral Therapy) coverage among people living with HIV estimates Data:
+- ***Instructions for slider:***
+For the slider, if you move the slider, it will show you the estimated number of people (all ages) living with HIV in that year. Also, if you hover your mouse over a country, it will tell you the name, year, and number of people living with HIV in that specific country.
+
 - ***Dataset:***
 For our data we used five different datasets. art_coverage_by_country_pd gives us the countries and the
 estimated number of cases of HIV/AIDS that have been reported, the number of people
