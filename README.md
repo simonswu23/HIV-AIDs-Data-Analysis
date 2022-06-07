@@ -1,9 +1,6 @@
 # HIV-AIDs-Data-Analysis
-[add brief description of our overall project]
+We wanted to look at HIV/AIDS and see if anything has changed over the years for our project. HIV/AIDS has been around for years, and we wanted to see which countries have the highest infection rate, ART treatment, demographic categories around the United States, and how it looked over the years. From the datasets, we found we were able to create charts from our data and a map with a slider to see how the countries looked over the years.
 
-[add instructions]
-
-[standardize formatting]
 
 ## For the 2011-2017 US HIV/AIDs Data:
 - dataset used should be labelled as 'persons-living-with-hiv-aids-2011-2017.csv' in directory
@@ -11,7 +8,7 @@
 - graphs are saved as png files to the directory
 - no new libraries needed for this module
 
-## For the [other dataset description] Data:
+## From the Number of people living with HIV AIDS and ART (Anti Retro-viral Therapy) coverage among people living with HIV estimates Data:
 - ***Dataset:***
 For our data we used five different datasets. art_coverage_by_country_pd gives us the countries and the
 estimated number of cases of HIV/AIDS that have been reported, the number of people
